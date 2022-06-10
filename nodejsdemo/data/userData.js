@@ -1,6 +1,4 @@
-const dummy="dummy data"
 
-const sample="sample data"
 
 const userData=[
     {
@@ -13,8 +11,5 @@ const userData=[
     },
 
 ]
-function printDetails(uname,uemail){
-    console.log(`the user name is ${uname} contact email is ${uemail}`)
-}
 
-module.exports={dummy,sample,userData,printDetails}
+module.exports=userData
