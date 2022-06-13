@@ -1,6 +1,7 @@
+const { create } = require("domain")
 const http=require("http")
 const memberData=require("./data/userData")
-const createData=[]
+let createData=[]
 const server=http.createServer((req,res)=>{
 if(req.url==="/"&&req.method==="GET"){
     res.writeHead(200,{
@@ -23,7 +24,25 @@ reqdata+=chunk.toString()
 req.on("end",()=>{
     console.log("data end")
     createData.push(JSON.parse(reqdata))
-    console.log(createData)
+    console.log("data created",createData)
+})
+req.on("close",()=>{
+    console.log("close")
+})
+res.end("succesfully created")
+
+}
+else if(req.url==="/update"&&req.method==="PUT"){
+    let reqdata=""
+req.on("data",(chunk)=>{
+    console.log("data start")
+reqdata+=chunk.toString()
+})
+req.on("end",()=>{
+    const parseddata=JSON.parse(reqdata)
+    createData=createData.filter((item)=>item.id!==parseddata.id)
+    createData.push(parseddata)
+    console.log("updated array",createData)
 })
 req.on("close",()=>{
     console.log("close")
