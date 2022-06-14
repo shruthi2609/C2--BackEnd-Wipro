@@ -1,0 +1,10 @@
+1. logger file for all the errors reported
+
+errorlog.txt
+
+2.logger for all the keywords searched by the user,time.
+
+
+3.signup -> post
+username
+country
