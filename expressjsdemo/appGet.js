@@ -1,11 +1,13 @@
 const express=require("express")
 const server=express()
-server.get("/",(req,res)=>{
+
+
+//server.get("/",(req,res)=>{
     //dont use writeHead + res.send
     // writeHead + res.end or res.write will work
    /* res.writeHead(200,{'Content-Type':'application/json'})
     res.send("<h1>heading</h1>")*/
-    res.status(200).send("hello js")
+   /* res.status(200).send("hello js")
 })
 
 server.get("/contact",(req,res)=>{
@@ -18,7 +20,8 @@ server.get("/contact",(req,res)=>{
 
 server.all("*",(req,res)=>{
     res.status(404).send("<h1>Page not Found </h1>")
-})
+})*/
+
 
 const app=server.listen(3001,()=>{
    /* console.log(app.address().address)
