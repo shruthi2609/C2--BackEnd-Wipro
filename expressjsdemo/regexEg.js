@@ -17,9 +17,9 @@ server.get(/\/user|users|member/,(req,res)=>{
     res.send("user details received")
 })
 
-/*server.get(/\/[a-zA-Z0-9$.]+@[a-zA-Z_]+.[a-z]{2,3}$/,(req,res)=>{
+server.get(/\/^(?!route).[a-zA-Z0-9$.]+@[a-zA-Z_]+.[a-z]{2,3}$/,(req,res)=>{
     res.send("email accepted")
-})*/
+})
 
 server.get("/route/:email([a-zA-Z0-9$.]+@[a-zA-Z_]+.[a-z]{2,3}$)/:username([a-z]{4,10})",(req,res)=>{
     res.send(`recevied ${req.params.email}`)
