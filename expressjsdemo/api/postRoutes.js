@@ -1,6 +1,6 @@
 const express=require("express")
 const router=express.Router()
-router.post("/createUser",(req,res)=>{
+router.post("/create",(req,res)=>{
     res.send("created")
 })
 module.exports=router
