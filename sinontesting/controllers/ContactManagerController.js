@@ -1,6 +1,30 @@
 const ContactModel=require("../models/ContactManager")
 let Controllers={}
 
+Controllers.createData=function(req,res){
+    const data=req.body
+    return ContactModel.create(data,function(err,result){
+        if(err){
+           return res.send("error")
+        }
+        else{
+            return res.json(result)
+        }
+    })
+}
+
+Controllers.getData=function(req,res){
+    const id=req.params.id
+    return ContactModel.findById(id,function(err,result){
+        if(err){
+           return res.send("error")
+        }
+        else{
+            return res.json(result)
+        }
+    })
+}
+
 Controllers.createUser=function(req,res){
 const data=req.body
 ContactModel.create({

@@ -6,6 +6,8 @@ const Controllers=require("../controllers/ContactManagerController")
 
 router.post("/create",Controllers.createUser)
 
+router.post("/createdata",Controllers.createData)
+
 router.get("/fetchuser/:userid",Controllers.fetchUserDetails)
 
 router.get("/fetchall",Controllers.fetchAll)
