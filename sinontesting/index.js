@@ -27,11 +27,11 @@ const specs=SwaggerJsDoc(options)
 server.use("/api-doc",
 SwaggerUi.serve,
 SwaggerUi.setup(specs,{explorer:true}))
-
+const authentication=require("./routes/AuthenticationRoutes")
 const mongoose=require("mongoose")
 const ContactManagerRoute=require("./routes/ContactManagerRoutes")
-mongoose.connect("mongodb://localhost:27017/c2sinon").then((res)=>console.log("connected to db")).catch((err)=>console.log(err))
-
+mongoose.connect("mongodb://localhost:27017/c2Authentication").then((res)=>console.log("connected to db")).catch((err)=>console.log(err))
+server.use("/",authentication)
 server.use("/",ContactManagerRoute)
 
 server.listen(3001,()=>console.log("server started"))
