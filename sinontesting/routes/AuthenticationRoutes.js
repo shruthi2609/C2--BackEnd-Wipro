@@ -2,6 +2,8 @@ const express=require("express")
 const router=express.Router()
 const UserModel=require("../models/UserModel")
 const bcrypt=require("bcrypt")
+const jwt=require("jsonwebtoken")
+const privateKey="jamesbond"
 router.post("/signup",async(req,res)=>{
     try{
     const data=req.body
@@ -38,7 +40,15 @@ router.post("/signin",async (req,res)=>{
        if(user){
        const comparison=await bcrypt.compare(data.password,user.password)
        if(comparison){
-        res.status(200).send({msg:"login successfull",status:true})
+
+        const payload={
+           email:data.email
+        }
+        const gentoken=jwt.sign(payload,privateKey,{expiresIn:'1h'})
+      /*  const gentoken=jwt.sign({email:data.email},'jamesbond')
+       // console.log(token)*/
+
+        res.status(200).send({msg:"login successfull",status:true,token:gentoken})
        }
        else{
         res.status(404).send({msg:"login is notsuccessfull,check your password",status:false})

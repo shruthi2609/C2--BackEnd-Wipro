@@ -30,7 +30,11 @@ SwaggerUi.setup(specs,{explorer:true}))
 const authentication=require("./routes/AuthenticationRoutes")
 const mongoose=require("mongoose")
 const ContactManagerRoute=require("./routes/ContactManagerRoutes")
+
+
 mongoose.connect("mongodb://localhost:27017/c2Authentication").then((res)=>console.log("connected to db")).catch((err)=>console.log(err))
+
+
 server.use("/",authentication)
 server.use("/",ContactManagerRoute)
 
