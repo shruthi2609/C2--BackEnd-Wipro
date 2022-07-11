@@ -2,6 +2,7 @@ const express=require("express")
 const server=express()
 const bp=require("body-parser")
 server.use(bp.json())
+
 const SwaggerJsDoc=require("swagger-jsdoc")
 const SwaggerUi=require("swagger-ui-express")
 const options={
@@ -27,16 +28,17 @@ const specs=SwaggerJsDoc(options)
 server.use("/api-doc",
 SwaggerUi.serve,
 SwaggerUi.setup(specs,{explorer:true}))
-const authentication=require("./routes/AuthenticationRoutes")
+const authentication=require("./routes/Authentication")
+const protectedRoutes=require("./routes/ProtectedRoutes")
+server.use("/",authentication)
 const mongoose=require("mongoose")
 const ContactManagerRoute=require("./routes/ContactManagerRoutes")
-
-
 mongoose.connect("mongodb://localhost:27017/c2Authentication").then((res)=>console.log("connected to db")).catch((err)=>console.log(err))
 
 
-server.use("/",authentication)
+
 server.use("/",ContactManagerRoute)
+server.use("/",protectedRoutes)
 
 server.listen(3001,()=>console.log("server started"))
 
