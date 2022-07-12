@@ -19,11 +19,24 @@ router.post("/signup",async (req,res)=>{
     else{
     const hashedpassword=await bcrypt.hash(data.password,4)
     console.log(hashedpassword)
+    if(!data.address){
+      data.address=data.country+" "+data.pincode
+    }
     try{
-      const result=  await UserModel.create({
-        email:data.email,
-        password:hashedpassword
-      })
+      const user=new UserModel(
+        {
+            "email":data.email,
+            "password":data.password,
+            "role":data.role,
+            "phone":data.phone,
+            "age":data.age,
+            "username":data.username,
+            "country":data.country,
+            "pincode":data.pincode 
+        }
+    )
+      const result=await user.signUp()
+      
       res.status(201).send("signup successfull")
     }
     catch(err){
