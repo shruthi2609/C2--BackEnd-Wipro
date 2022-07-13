@@ -2,6 +2,7 @@ const express=require("express")
 const server=express()
 const bp=require("body-parser")
 server.use(bp.json())
+const cors=require("cors")
 
 const SwaggerJsDoc=require("swagger-jsdoc")
 const SwaggerUi=require("swagger-ui-express")
@@ -28,6 +29,7 @@ const specs=SwaggerJsDoc(options)
 server.use("/api-doc",
 SwaggerUi.serve,
 SwaggerUi.setup(specs,{explorer:true}))
+server.use(cors())
 const authentication=require("./routes/Authentication")
 const protectedRoutes=require("./routes/ProtectedRoutes")
 server.use("/",authentication)

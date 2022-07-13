@@ -26,7 +26,7 @@ router.post("/signup",async (req,res)=>{
       const user=new UserModel(
         {
             "email":data.email,
-            "password":data.password,
+            "password":hashedpassword,
             "role":data.role,
             "phone":data.phone,
             "age":data.age,
@@ -69,6 +69,13 @@ router.post("/signin",async (req,res)=>{
   catch(err){
     res.status(404).send(err)
   } 
+})
+
+router.post("/login",async (req,res)=>{
+  const data=req.body
+  const result=await UserModel.signInStatics(data)
+  console.log(result)
+  res.send(result)
 })
 module.exports=router
 
