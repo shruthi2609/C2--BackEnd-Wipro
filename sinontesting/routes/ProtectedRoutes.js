@@ -10,7 +10,7 @@ router.post("/updatepassword",authorize,async (req,res)=>{
     const updated=await UserModel.findOneAndUpdate({email:req.token.email},{password:hashedpassword})
     console.log(updated)
     if(updated){
-        res.status(301).send({msg:"updated successfully",status:true})
+        res.status(201).send({msg:"updated successfully",status:true})
     }
     else{
         res.status(404).send({msg:"update failed",status:false})
@@ -18,6 +18,7 @@ router.post("/updatepassword",authorize,async (req,res)=>{
     
 }
     catch(err){
+        console.log(err)
         res.send("updated err")
     }
 })
@@ -34,7 +35,7 @@ try{
 }
 catch(err){
     console.log(err)
-    res.send("you are not authorized")
+    res.send({msg:"you are not authorized",status:false})
 }
 }
 module.exports=router

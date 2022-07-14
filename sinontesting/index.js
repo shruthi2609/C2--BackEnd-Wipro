@@ -30,9 +30,11 @@ server.use("/api-doc",
 SwaggerUi.serve,
 SwaggerUi.setup(specs,{explorer:true}))
 server.use(cors())
+const getDetails=require("./routes/getUsers")
 const authentication=require("./routes/Authentication")
 const protectedRoutes=require("./routes/ProtectedRoutes")
 server.use("/",authentication)
+server.use("/",getDetails)
 const mongoose=require("mongoose")
 const ContactManagerRoute=require("./routes/ContactManagerRoutes")
 mongoose.connect("mongodb://localhost:27017/c2Authentication").then((res)=>console.log("connected to db")).catch((err)=>console.log(err))
