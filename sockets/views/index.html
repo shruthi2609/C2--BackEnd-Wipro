@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Client Application</h1>
+    <h3 id="offers"></h3>
+    <h1 id="ads"></h1>
+    <h1 style="background-color:aqua" id="deals"></h1>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const offerElement=document.getElementById("offers")
+        const adsElement=document.getElementById("ads")
+        const dealsElement=document.getElementById("deals")
+        const socket=io()
+        socket.on('message',(data)=>{
+            offerElement.innerHTML=data
+        })
+        socket.on('advertisement',(data)=>{
+          adsElement.innerHTML=data.msg
+        })
+        socket.on('deals',(data)=>{
+          dealsElement.innerHTML=data.timeleft
+        })
+
+        socket.emit('clientevent',{clientmsg:"hey im client"})
+    </script>
+</body>
+</html>
